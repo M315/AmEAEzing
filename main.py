@@ -15,9 +15,9 @@ fa = FontAwesome(app)
 @app.route('/candidatos')
 def candidatos():
 	global laberinto
-	candidatos=buscaCandidatos(laberinto,laberinto.getPosActual())
+	candidatos=buscaCandidatos(laberinto.current,laberinto)
 	for candidato in candidatos:
-		laberinto.laberinto[candidato[0]][candidato[1]]='C'
+		laberinto.laberinto[candidato.x][candidato.y]='C'
 	return render_template('index.html', layout=laberinto.laberinto)
 
 @app.route('/nuevo', methods=['POST'])
@@ -43,7 +43,7 @@ def nuevo():
 @app.route('/solve')
 def next():
 	global laberinto
-	resolverLaberinto(laberinto, laberinto.getPosActual())
+	resolverLaberinto(laberinto)
 
 	return render_template('index.html', layout=laberinto.laberinto)
 
